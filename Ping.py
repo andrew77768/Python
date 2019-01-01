@@ -28,9 +28,7 @@ elif sys.platform.startswith('cygwin'):
 elif sys.platform.startswith('darwin'):
     print ("Sucks to be you!")
 
-
-
 if result == 0:
-  print ("machine is online!")
+  print (hostname, "is online!")
 else:
-  print ("machine is offline!")
+  print (hostname, "is offline!")
