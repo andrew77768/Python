@@ -16,7 +16,19 @@ debug()
 
 print ("Please enter the hostname/IP address:")
 hostname = input()
-response = os.system("ping -w 10 " + hostname)
+
+if sys.platform.startswith('linux'):
+    result = os.system("ping -c 10 " + hostname)
+elif sys.platform.startswith('win32'):
+    result = os.system("ping -w 10 " + hostname)
+elif sys.platform.startswith('freebsd'):
+    print ("Sucks to be you!")
+elif sys.platform.startswith('cygwin'):
+    print ("Sucks to be you!")
+elif sys.platform.startswith('darwin'):
+    print ("Sucks to be you!")
+
+
 
 if result == 0:
   print 'machine is online!'
