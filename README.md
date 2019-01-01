@@ -3,4 +3,4 @@ Python file dump
 
 
 
-New year resolution. Get into Python
+A New Years resolution for 2019. Get into Python
