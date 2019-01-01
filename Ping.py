@@ -31,6 +31,6 @@ elif sys.platform.startswith('darwin'):
 
 
 if result == 0:
-  print 'machine is online!'
+  print ("machine is online!")
 else:
-  print 'machine is offline!'
+  print ("machine is offline!")
