@@ -3,25 +3,33 @@
 import os
 import socket 
 import sys
+import split
 
 #Debug Mode, to test and all
 def Debug_Mode():
     Local_Hostname = socket.gethostname()
     Local_IPAddress = socket.gethostbyname(Local_Hostname)
+    
     print ("System Platform:",sys.platform)
     #Below only work on a windows machine.
     print("Windows OS Version:",sys.getwindowsversion().major)
     print("Windows Version:",sys.winver)
     print("")
-    print("IP:",Local_IPAddress)
+    
+    print("IPV4 Address:",Local_IPAddress)
     print("Hostname:",Local_Hostname)
+    print_test = socket.gethostbyaddr(Local_Hostname)
+    print("Domain:",print_test[0])
+    print("IPV6 Address:",print_test[2])
     print("")
 
 #Call our debug mode
-Debug_Mode()
+#Debug_Mode()
 
 print ("Please enter the hostname/IP address you'd like to check:")
 Hostname_tocheck = input()
+Hostname_tocheckIP = socket.gethostbyname(Hostname_tocheck)
+
 
 if sys.platform.startswith('linux'):
     result = os.system("ping -c 10 " + Hostname_tocheck)
@@ -35,7 +43,7 @@ elif sys.platform.startswith('darwin'):
     print("Sucks to be you!")
 
 if result == 0:
-  print(Hostname_tocheck, "is online!")
+  print(Hostname_tocheck,"/",Hostname_tocheckIP, "is online!")
 else:
-  print(Hostname_tocheck, "is offline!")
+  print(Hostname_tocheck,"/",Hostname_tocheckIP, "is offline!")
 
