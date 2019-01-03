@@ -1,34 +1,41 @@
-import os
-
 #https://docs.python.org/3/library/sys.html#sys.platform
+
+import os
+import socket 
 import sys
 
 #Debug Mode, to test and all
-def debug():
-    print (sys.platform)
+def Debug_Mode():
+    Local_Hostname = socket.gethostname()
+    Local_IPAddress = socket.gethostbyname(Local_Hostname)
+    print ("System Platform:",sys.platform)
     #Below only work on a windows machine.
-    print (sys.winver)
-    print (sys.getwindowsversion().major)
+    print("Windows OS Version:",sys.getwindowsversion().major)
+    print("Windows Version:",sys.winver)
+    print("")
+    print("IP:",Local_IPAddress)
+    print("Hostname:",Local_Hostname)
+    print("")
 
 #Call our debug mode
-debug()
+Debug_Mode()
 
-
-print ("Please enter the hostname/IP address:")
-hostname = input()
+print ("Please enter the hostname/IP address you'd like to check:")
+Hostname_tocheck = input()
 
 if sys.platform.startswith('linux'):
-    result = os.system("ping -c 10 " + hostname)
+    result = os.system("ping -c 10 " + Hostname_tocheck)
 elif sys.platform.startswith('win32'):
-    result = os.system("ping -w 10 " + hostname)
+    result = os.system("ping -w 10 " + Hostname_tocheck)
 elif sys.platform.startswith('freebsd'):
-    print ("Sucks to be you!")
+    print("Sucks to be you!")
 elif sys.platform.startswith('cygwin'):
-    print ("Sucks to be you!")
+    print("Sucks to be you!")
 elif sys.platform.startswith('darwin'):
-    print ("Sucks to be you!")
+    print("Sucks to be you!")
 
 if result == 0:
-  print (hostname, "is online!")
+  print(Hostname_tocheck, "is online!")
 else:
-  print (hostname, "is offline!")
+  print(Hostname_tocheck, "is offline!")
+
