@@ -1,0 +1,28 @@
+import os
+import socket 
+import sys
+
+outcome = 0
+
+print ("Please enter the hostname/IP address you'd like to check:")
+Hostname_tocheck = input()
+
+def PingTest():
+    if sys.platform.startswith('linux'):
+        result = os.system("ping -c 10 " + Hostname_tocheck)
+    elif sys.platform.startswith('win32'):
+        result = os.system("ping -w 10 " + Hostname_tocheck)
+    elif sys.platform.startswith('freebsd'):
+        print("Not supported!")
+    elif sys.platform.startswith('cygwin'):
+        print("Not supported!")
+    elif sys.platform.startswith('darwin'):
+        print("Not supported!")
+        
+Hostname_tocheckIP = socket.gethostbyname(Hostname_tocheck)
+
+if outcome == 0:
+  print(Hostname_tocheck,"/",Hostname_tocheckIP, "is online!")
+else:
+  print(Hostname_tocheck,"/",Hostname_tocheckIP, "is offline!")
+
