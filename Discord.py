@@ -12,6 +12,7 @@ token = "WeirdChamp"
 #Discord=Client
 
 def Debug():
+    #Quick and dirty host debug for host output | Also accessible though command
     print ("Discord Info: ", discord.version_info)
     print ("Logged In As: ", client.user.name)
     print ("Bot User Info: ", client.user)
@@ -32,11 +33,12 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    # we do not want the bot to reply to itself
+    # We do not want the bot to reply to itself - Purely cause it fucks the Oracle thing up lmfaoo
     if message.author == client.user:
         return
+
     if message.content == "!Commands":
-        await message.channel.send ("!Commands, !Author, !Website, !Version, , , !Bot, , !ServerInfo,")
+        await message.channel.send ("!Commands, !Author, !Website, !Version, , , !Bot, , !ServerInfo, !Help, !Invite")
 
     elif message.content == "!Author":
         await message.channel.send ("@Andrew A#4644")
@@ -48,13 +50,20 @@ async def on_message(message):
         await message.channel.send ("Bot Version: Alpha 0.1")
 
     elif message.content == "!Debug":
-        DebugOut = Debug()
-        await message.channel.send ("```" + DebugOut + "```")
+    #Quick and dirty host debug
+        await message.channel.send ("Discord Info: " + str(discord.version_info))
+        await message.channel.send ("Logged In As: " + str(client.user.name))
+        await message.channel.send ("Bot User Info: " + str(client.user))
+        await message.channel.send ("ID: " + str(client.user.id))
+        await message.channel.send ("Bot Version: Alpha 0.1")
+        await message.channel.send ("Python Discord Version: " + str(discord.__version__))
+        await message.channel.send ("Avatar URL: " + str(client.user.avatar_url))
 
 #EasterEggs
     elif message.content == "!100Spam":
         for i in range(100):
-            await message.channel.send ("Easter Egg Found! 100 Spam!")
+            await message.channel.send ("Easter Egg Found! Wow!")
+            await message.add_reaction("😮")
 
     elif message.content == "!Bot":
         await message.channel.send("I am the spirit of George, I live on as this bot. #420BlazeIt")
@@ -68,6 +77,11 @@ async def on_message(message):
         await message.channel.send("Oracle LUL")
         await message.channel.send(file=discord.File('Picture/Oracle.jpg'))
 
+    elif "Andrew" and  "alcoholic" in message.content:
+        await message.add_reaction("🤔")
+        await message.channel.send("Hmmmm")
+        await message.channel.send(file=discord.File('Picture/ALCCMM.png'))
+
     elif message.content == "!ServerInfo":
         await message.channel.send ("Server Name: " + message.guild.name)
         await message.channel.send ("Server ID: " + str(message.guild.id))
@@ -79,9 +93,16 @@ async def on_message(message):
         await message.channel.send ("Server Channels: " + str(message.guild.channels))
         await message.channel.send ("Server Roles: " + str(message.guild.roles))
 
-#Exception Handling
+    elif message.content == "!Help":
+        await message.channel.send ("Try !Commands")
+
+    elif message.content == "!Invite":
+        await message.channel.send ("Here's an invite link if you want me in your server https://discordapp.com/oauth2/authorize?scope=bot&client_id=267409712612376584")
+
+#Quick and Dirtyyy Exception Handling
 async def on_error(event, *args, **kwargs):
-    message = args[0,1,2] #Gets the message object
+    message = event + args + kwargs #Gets the message object
     await message.channel.send("You caused an error!", message) #send the message to the channel
+    print (message)
 
 client.run(token)
