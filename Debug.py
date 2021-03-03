@@ -2,8 +2,6 @@ import os
 import socket 
 import sys
 
-outcome = 0
-
 #Debug Mode, to test and all
 def Debug_Mode():
     Local_Hostname = socket.gethostname()
