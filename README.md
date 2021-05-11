@@ -1,12 +1,9 @@
 # Python
 Python file dump
 
-Future ideas:
+Future ideas (prob never going to happen):
 Quick ping TraceRT for local IPs in local IP Scope
 MX to different DNS servers to see the different IPs returned
-
-
-New year resolution. Get into Python
 
 At some point I will put all of my scripts into here but they're all over the place at the moment.
 
